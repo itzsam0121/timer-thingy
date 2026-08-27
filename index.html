@@ -70,14 +70,14 @@
     const intro = document.getElementById("intro");
     const timerContainer = document.getElementById("timer-container");
 
-    // Show for 5 seconds then fade up (works somehow)
+    // Show for '3' seconds then fade up (works somehow)
     setTimeout(() => {
         intro.classList.add("fade-up");
 
         setTimeout(() => {
             timerContainer.classList.add("show");
         }, 1000);
-    }, 5000);
+    }, 3000);
 
     const targetDate = new Date("September 17, 2026 09:00:00").getTime();
 
