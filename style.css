@@ -1,0 +1,11 @@
+body {
+  background-color: #00000; /* black background */
+  background-image: URL("https://raw.githubusercontent.com/itzsam0121/timer-thingy/refs/heads/main/ThePromiseCareerInstitutePrimaryLogoImage.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 0;
+  font-family: Instrument Serif, serif;
+  height: 100vh;
+  position: relative;
+}
