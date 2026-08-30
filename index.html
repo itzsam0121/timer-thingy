@@ -28,6 +28,14 @@ body {
     overflow: hidden;
     color: white;
     background: black;
+    position: relative;
+}
+
+/* Background Image Only */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
 
     background-image:
         linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
@@ -37,12 +45,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 
-    filter: blur(8px);
+    filter: blur(10px);
     transform: scale(1.1);
 
     z-index: -1;
 }
-
+`
+    
 /* Black fade screen */
 #fade-screen {
     position: fixed;
