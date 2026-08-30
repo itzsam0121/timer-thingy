@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 :root {
-    /* bg i think i forgor */
+    /* CHANGE THIS IMAGE LINK */
     --bg-image: url("https://raw.githubusercontent.com/itzsam0121/timer-thingy/refs/heads/main/ThePromiseCareerInstitutePrimaryLogoImage.png");
 }
 
@@ -29,10 +29,7 @@ body {
     color: white;
 
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
-        ),
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
         var(--bg-image);
 
     background-size: cover;
@@ -40,8 +37,24 @@ body {
     background-repeat: no-repeat;
 }
 
+/* Black fade screen */
+#fade-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1.5s ease;
+}
+
+#fade-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
 #intro {
     position: absolute;
+    z-index: 1001;
     font-size: 4rem;
     font-style: italic;
     opacity: 1;
@@ -74,18 +87,18 @@ body {
 h1 {
     margin-bottom: 20px;
     font-size: 2rem;
-    font-style: italic;
 }
 
 #timer {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    line-height: 1.4;
 }
 </style>
 </head>
 
 <body>
+
+<div id="fade-screen"></div>
 
 <div id="intro">Are you ready?</div>
 
@@ -97,17 +110,19 @@ h1 {
 <script>
 const intro = document.getElementById("intro");
 const timerContainer = document.getElementById("timer-container");
+const fadeScreen = document.getElementById("fade-screen");
 
-// intro
+// Intro for 3 seconds
 setTimeout(() => {
     intro.classList.add("fade-up");
+    fadeScreen.classList.add("hide");
 
     setTimeout(() => {
         timerContainer.classList.add("show");
     }, 1000);
 }, 3000);
 
-// date stuff
+// September 14, 2026 9:00 AM
 const targetDate = new Date("September 14, 2026 09:00:00").getTime();
 
 function updateTimer() {
@@ -115,31 +130,23 @@ function updateTimer() {
     const distance = targetDate - now;
 
     if (distance <= 0) {
-        document.getElementById("timer").innerHTML = "done!";
+        document.getElementById("timer").textContent = "done!";
         return;
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) /
-        (1000 * 60 * 60)
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
-
     const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) /
-        (1000 * 60)
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
     );
-
     const seconds = Math.floor(
-        (distance % (1000 * 60)) /
-        1000
+        (distance % (1000 * 60)) / 1000
     );
 
-    document.getElementById("timer").innerHTML =
-        `${days} Days<br>
-         ${hours} Hours<br>
-         ${minutes} Minutes<br>
-         ${seconds} Seconds`;
+    document.getElementById("timer").textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
 updateTimer();
